@@ -14,6 +14,7 @@ message("在CMAKE中配置 QT_SDK_DIR 选项指定QT路径; 当前路径: ${QT_S
 SET(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/Install CACHE PATH "Installation path" FORCE)
 
 option(BUILD_ELAPACKETIO "Build ElaPacketIO" OFF)
+option(BUILD_EXAMPLE "Build ElaWidgetToolsExample" OFF)
 list(APPEND CMAKE_PREFIX_PATH ${QT_SDK_DIR})
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
@@ -35,8 +36,15 @@ if (WIN32 AND BUILD_ELAPACKETIO)
     add_definitions(-DBUILD_WITH_ELAPACKETIO)
     add_subdirectory(ElaPacketIO)
 endif ()
-add_subdirectory(ElaWidgetToolsExample)
+
+if(BUILD_EXAMPLE)
+    add_subdirectory(ElaWidgetToolsExample)
+endif()
 
 if (${QT_VERSION} VERSION_LESS 6.1.0)
     set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.ElaWidgetTools)
 endif ()
+
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release)
+endif()
