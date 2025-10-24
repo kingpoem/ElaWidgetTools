@@ -4,15 +4,15 @@ project(ElaWidgetToolsExample VERSION 0.1 LANGUAGES CXX)
 
 FILE(GLOB ORIGIN *.cpp *.h)
 FILE(GLOB MODELVIEW ModelView/*.h ModelView/*.cpp)
-FILE(GLOB EAXMPLEPAGE ExamplePage/*.h ExamplePage/*.cpp)
+FILE(GLOB EXAMPLEPAGE ExamplePage/*.h ExamplePage/*.cpp)
 
 source_group(ModelView FILES ${MODELVIEW})
-source_group(ExamplePage FILES ${EAXMPLEPAGE})
+source_group(ExamplePage FILES ${EXAMPLEPAGE})
 
 set(PROJECT_SOURCES
     ${ORIGIN}
     ${MODELVIEW}
-    ${EAXMPLEPAGE}
+    ${EXAMPLEPAGE}
 )
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -94,12 +94,14 @@ endif ()
 include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}
+    BUNDLE DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}
     RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}
 )
 if (MSVC)
     install(
         FILES $<TARGET_PDB_FILE:${PROJECT_NAME}>
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME} OPTIONAL)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME} OPTIONAL
+    )
 endif ()
 find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${QT_SDK_DIR}/bin")
 if (WIN32)
