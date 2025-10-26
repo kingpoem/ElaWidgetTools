@@ -60,15 +60,15 @@ ElaNavigationBar::ElaNavigationBar(QWidget* parent)
 
     // 搜索栏和按钮组
     d->_navigationButton = new ElaToolButton(this);
-    d->_navigationButton->setFixedSize(40, 38);
+    d->_navigationButton->setFixedSize(0, 0);
     d->_navigationButton->setElaIcon(ElaIconType::Bars);
-    d->_navigationButton->setBorderRadius(8);
+    d->_navigationButton->setBorderRadius(0);
     connect(d->_navigationButton, &ElaToolButton::clicked, d, &ElaNavigationBarPrivate::onNavigationButtonClicked);
 
     d->_searchButton = new ElaToolButton(this);
-    d->_searchButton->setFixedSize(40, 38);
+    d->_searchButton->setFixedSize(0, 0);
     d->_searchButton->setElaIcon(ElaIconType::MagnifyingGlass);
-    d->_searchButton->setBorderRadius(8);
+    d->_searchButton->setBorderRadius(0);
     connect(d->_searchButton, &ElaToolButton::clicked, d, &ElaNavigationBarPrivate::onNavigationButtonClicked);
     d->_searchButton->setVisible(false);
 
